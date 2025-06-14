@@ -1,0 +1,33 @@
+server:
+  port: 8086
+  application:
+    name: petstore
+
+spring:
+  profiles.active: test
+  hateoas:
+    use-hal-as-default-json-media-type: false
+  datasource:
+    initialization-mode: NEVER
+    url: jdbc:h2:mem:billers;DB_CLOSE_ON_EXIT=false
+    driver-class-name: org.h2.Driver
+    username: ENC(zGsD1xMlFAgUaoR3pl8f0w==)
+    password: ENC(zGsD1xMlFAgUaoR3pl8f0w==)
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      idle-timeout: 10000
+      connection-timeout: 60000
+      connection-test-query: SELECT 1
+      minimum-idle: 3
+      maximum-pool-size: 10
+      pool-name: v4-datasource
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate.format_sql: true
+  h2:
+    console:
+      enabled: true
