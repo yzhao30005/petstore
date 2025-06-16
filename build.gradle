@@ -25,9 +25,27 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'com.h2database:h2'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.10" // Use the latest stable version if possible
+}
+
+// Jacoco test coverage report configuration
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+    finalizedBy jacocoTestReport // Generate report after tests
 }
